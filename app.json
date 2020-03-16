@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "DoD Mobile",
+    "slug": "dod-mobile",
+    "privacy": "public",
+    "sdkVersion": "36.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "usf.sdlc.dod",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.152090196286-b08vh6q33df5s2qtjo93ufgdf77thgj8"
+        }
+      },
+      "googleServicesFile": "./GoogleService-Info.plist"
+    },
+    "android": {
+      "package": "usf.sdlc.dod",
+      "googleServicesFile": "./google-services.json"
+    }
+  }
+}

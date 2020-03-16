@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>152090196286-b08vh6q33df5s2qtjo93ufgdf77thgj8.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.152090196286-b08vh6q33df5s2qtjo93ufgdf77thgj8</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>152090196286-pp7q17t7dah8mebcqnlalkbtmjsc39j6.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB1z8WlPym2XV38F3KGmJn-iobNrrLc-MU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>152090196286</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>usf.sdlc.dod</string>
+	<key>PROJECT_ID</key>
+	<string>dodwatcher</string>
+	<key>STORAGE_BUCKET</key>
+	<string>dodwatcher.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:152090196286:ios:eac012b44b098825e0d46f</string>
+	<key>DATABASE_URL</key>
+	<string>https://dodwatcher.firebaseio.com</string>
+</dict>
+</plist>
