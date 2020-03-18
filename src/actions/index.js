@@ -1,27 +1,7 @@
-import {LOGIN} from "./types";
+import {LOGIN_REQUESTED, LOGIN_SUCCESS} from "./types";
 
-export const login = () => ({ type: LOGIN })
+export const loginRequest = (accessCode) => ({ type: LOGIN_REQUESTED, payload: accessCode })
 
-import { FETCH_GITHUB_DATA } from './types';
-import axios from 'axios';
-
-const apiUrl = 'https://api.github.com/users/KrunalLathiya';
-
-export const fetchData = (data) => {
-    return {
-        type: FETCH_GITHUB_DATA,
-        data
-    }
-};
-
-export const fetchGithubData = () => {
-    return (dispatch) => {
-        return axios.get(apiUrl)
-            .then(response => {
-                dispatch(fetchData(response.data))
-            })
-            .catch(error => {
-                throw(error);
-            });
-    };
-};
+export const loginSuccess = (user) => (
+    { type: LOGIN_SUCCESS, payload: user }
+)

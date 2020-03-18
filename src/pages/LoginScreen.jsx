@@ -1,76 +1,40 @@
 import React from 'react';
-import {Image, Platform, StyleSheet, Text, View} from "react-native";
+import {Text, View, Button} from "react-native";
 import GoogleSignInButton from "../components/GoogleSignInButton";
 import * as AppAuth from 'expo-app-auth';
+import { connect } from 'react-redux';
 import * as GoogleSignIn from 'expo-google-sign-in';
+import {isRunningExpo, testToken} from "../constants/config";
+import {LOGIN_REQUESTED, LOGOUT_REQUESTED} from "../actions/types";
+import GoogleProfile from "../components/GoogleProfile";
 
 
 const { OAuthRedirect, URLSchemes } = AppAuth;
-
-// const isInClient = Constants.appOwnership === 'expo';
-const isInClient = false;
-if (isInClient) {
-    GoogleSignIn.allowInClient();
-}
-
-const clientIdForUseInTheExpoClient =
-    '603386649315-vp4revvrcgrcjme51ebuhbkbspl048l9.apps.googleusercontent.com';
-
-/*
- * Redefine this one with your client ID
- *
- * The iOS value is the one that really matters,
- * on Android this does nothing because the client ID
- * is read from the google-services.json.
- */
-const yourClientIdForUseInStandalone = Platform.select({
-    android:
-        '152090196286-pkjcq0hb22e0s6c89skktrvqscjo1ok5.apps.googleusercontent.com',
-    ios:
-        '152090196286-b08vh6q33df5s2qtjo93ufgdf77thgj8.apps.googleusercontent.com',
-});
-
-const clientId = isInClient
-    ? clientIdForUseInTheExpoClient
-    : yourClientIdForUseInStandalone;
 
 class LoginScreen extends React.Component {
     constructor(props) {
         super(props);
     }
 
-    state = { user: null };
+    // state = { user: null };
 
     componentDidMount() {
-        this.initAsync();
     }
-
-    initAsync = async () => {
-        await GoogleSignIn.initAsync({
-            // You may ommit the clientId when the firebase `googleServicesFile` is configured
-            // clientId: '152090196286-pkjcq0hb22e0s6c89skktrvqscjo1ok5.apps.googleusercontent.com'
-            clientId: clientId
-        });
-        this._syncUserWithStateAsync();
-    };
-
-    _syncUserWithStateAsync = async () => {
-        const user = await GoogleSignIn.signInSilentlyAsync();
-        this.setState({ user });
-    };
 
     signOutAsync = async () => {
         await GoogleSignIn.signOutAsync();
-        this.setState({ user: null });
+        this.props.logout();
     };
 
     signInAsync = async () => {
         try {
             await GoogleSignIn.askForPlayServicesAsync();
-            const { type, accessToken, user } = await Google.logInAsync(config);
+            const { type, user } = await GoogleSignIn.signInAsync();
             if (type === 'success') {
-                alert(accessToken);
-                this._syncUserWithStateAsync();
+                console.log("DISPATCH")
+                this.props.login(user.auth.accessToken)
+            } else {
+                alert("Type error: " + type);
             }
         } catch ({ message }) {
             alert('login: Error:' + message);
@@ -78,15 +42,19 @@ class LoginScreen extends React.Component {
     };
 
     onPress = () => {
-        if (this.state.user) {
+        if (this.props.user.accessToken) {
             this.signOutAsync();
         } else {
             this.signInAsync();
         }
     };
 
+    onPressLocal = () => {
+        this.props.login(testToken)
+    }
+
     get buttonTitle() {
-        return this.state.user ? 'Sign-Out of Google' : 'Sign-In with Google';
+        return this.props.user.accessToken ? 'Sign-Out of Google' : 'Sign-In with Google';
     }
 
     render() {
@@ -94,14 +62,20 @@ class LoginScreen extends React.Component {
             OAuthRedirect,
             URLSchemes,
         };
-        const { user } = this.state;
+        // const { user } = this.state;
 
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                {user && <GoogleProfile {...user} />}
-                <GoogleSignInButton onPress={this.onPress}>
-                    {this.buttonTitle}
-                </GoogleSignInButton>
+                {/*{this.props.user && <GoogleProfile {...this.props.user} />}*/}
+                {isRunningExpo ? (
+                    <Button onPress={this.onPressLocal}
+                            title="Login"
+                    />
+                ) : (
+                    <GoogleSignInButton onPress={this.onPress}>
+                        {this.buttonTitle}
+                    </GoogleSignInButton>
+                )}
                 <Text>AppAuth: {JSON.stringify(scheme, null, 2)}</Text>
             </View>
         )
@@ -110,39 +84,19 @@ class LoginScreen extends React.Component {
 
 }
 
-class GoogleProfile extends React.PureComponent {
-    render() {
-        const { photoURL, displayName, email } = this.props;
-        return (
-            <View style={styles.container}>
-                {photoURL && (
-                    <Image
-                        source={{
-                            uri: photoURL,
-                        }}
-                        style={styles.image}
-                    />
-                )}
-                <View style={{ marginLeft: 12 }}>
-                    <Text style={styles.text}>{displayName}</Text>
-                    <Text style={styles.text}>{email}</Text>
-                </View>
-            </View>
-        );
+const mapStateToProps = state => {
+    return {
+        user: state.user,
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        paddingHorizontal: 16,
-        paddingVertical: 12,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginBottom: 24,
-    },
-    image: { width: 128, borderRadius: 64, aspectRatio: 1 },
-    text: { color: 'black', fontSize: 16, fontWeight: '600' },
-});
+const mapDispatchToProps = dispatch => {
+    return ({
+        login: (accessCode) => {
+            return dispatch({type: LOGIN_REQUESTED, payload: accessCode})
+        },
+        logout: () => dispatch({type: LOGOUT_REQUESTED}),
+    })
+}
 
-export default LoginScreen;
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
