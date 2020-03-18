@@ -12,8 +12,7 @@ import {connect} from 'react-redux';
 import SettingsScreen from "./SettingsScreen";
 import * as Constants from "expo-constants";
 import * as GoogleSignIn from "expo-google-sign-in";
-import {Platform} from "react-native";
-import {isRunningExpo} from "../constants/config";
+import {Platform, View} from "react-native";
 import {LOGIN_REQUESTED, LOGOUT_REQUESTED} from "../actions/types";
 import DetailsScreen from "./DetailsPage";
 
@@ -55,11 +54,7 @@ function MainNavigation() {
 
 class Navigation extends React.Component {
     componentDidMount() {
-        if (isRunningExpo) {
-
-        } else {
-            this.initAsync();
-        }
+        this.initAsync();
     }
 
     initAsync = async () => {
@@ -81,7 +76,6 @@ class Navigation extends React.Component {
 
     render() {
         return (
-            <>
                 <NavigationContainer>
                     {this.props.user && this.props.user.accessToken ? (
                         <Stack.Navigator>
@@ -94,7 +88,6 @@ class Navigation extends React.Component {
                         </Stack.Navigator>
                     )}
                 </NavigationContainer>
-            </>
         )
     }
 }

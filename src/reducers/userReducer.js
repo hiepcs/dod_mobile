@@ -6,13 +6,8 @@ import {
     LOGOUT_FAILED,
     LOGOUT_SUCCESS
 } from "../actions/types";
-import {isRunningExpo, testEmail, testRole, testToken} from "../constants/config";
 
-const initialState = isRunningExpo ? {
-    email: testEmail,
-    accessToken: testToken,
-    role: testRole
-}: {
+const initialState = {
     email: '',
     accessToken: '',
     role: '',

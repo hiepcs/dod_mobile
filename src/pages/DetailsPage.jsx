@@ -1,8 +1,5 @@
-//This is an example code for Bottom Navigation//
 import React from 'react';
-//import react in our code.
 import { Text, View, TouchableOpacity, StyleSheet, Button, Share } from 'react-native';
-//import all the basic component we have used
 // import { ShareDialog } from 'react-native-fbsdk';
 
 export default class DetailsScreen extends React.Component {
