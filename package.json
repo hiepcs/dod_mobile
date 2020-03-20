@@ -20,6 +20,7 @@
     "lodash": "^4.17.15",
     "minimist": "^1.2.5",
     "react": "~16.9.0",
+    "react-content-loader": "^5.0.2",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
     "react-native-chart-kit": "^5.2.0",

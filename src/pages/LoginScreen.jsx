@@ -7,6 +7,9 @@ import * as GoogleSignIn from 'expo-google-sign-in';
 import {LOGIN_REQUESTED, LOGOUT_REQUESTED} from "../actions/types";
 import GoogleProfile from "../components/GoogleProfile";
 import Spinner from "react-native-loading-spinner-overlay";
+import { Facebook } from 'react-content-loader/native'
+
+const Loader = () => <Facebook backgroundColor="rgba(204, 204, 204,0.06)"/>
 
 
 const {OAuthRedirect, URLSchemes} = AppAuth;
@@ -62,16 +65,20 @@ class LoginScreen extends React.Component {
         return (
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                     <>
-                        <Spinner
-                            visible={this.props.loading}
-                            textContent={'Loading...'}
-                            textStyle={styles.spinnerTextStyle}
-                        />
+                        {/*<Spinner*/}
+                        {/*    visible={this.props.loading}*/}
+                        {/*    textContent={'Loading...'}*/}
+                        {/*    textStyle={styles.spinnerTextStyle}*/}
+                        {/*/>*/}
+                        {this.props.loading ? Loader() : (
+                                <>
+                                    <GoogleSignInButton onPress={this.onPress}>
+                                    {this.buttonTitle}
+                                    </GoogleSignInButton>
+                                    <Text>AppAuth: {JSON.stringify(scheme, null, 2)}</Text>
+                                </>
+                            )}
                         {/*{this.props.user && <GoogleProfile {...this.props.user} />}*/}
-                        <GoogleSignInButton onPress={this.onPress}>
-                            {this.buttonTitle}
-                        </GoogleSignInButton>
-                        <Text>AppAuth: {JSON.stringify(scheme, null, 2)}</Text>
                     </>
             </View>
         )
