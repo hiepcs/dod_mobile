@@ -31,7 +31,6 @@ class LoginScreen extends React.Component {
             await GoogleSignIn.askForPlayServicesAsync();
             const {type, user} = await GoogleSignIn.signInAsync();
             if (type === 'success') {
-                console.log("DISPATCH")
                 this.props.login(user.auth.accessToken)
             } else {
                 alert("Type error: " + type);

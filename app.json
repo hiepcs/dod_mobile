@@ -35,6 +35,7 @@
     "android": {
       "package": "usf.sdlc.dod",
       "googleServicesFile": "./google-services.json"
-    }
+    },
+    "description": ""
   }
 }

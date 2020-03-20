@@ -3,6 +3,7 @@ import React from "react";
 import {LOGOUT_REQUESTED} from "../actions/types";
 import { connect } from 'react-redux';
 import * as GoogleSignIn from 'expo-google-sign-in';
+import ProfitChart from "../components/ProfitChart";
 
 function HomeScreen({navigation, logout}) {
 
@@ -14,7 +15,7 @@ function HomeScreen({navigation, logout}) {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>Dog of The Dow</Text>
-            {/*<Button title="LoginScreen" onPress={() => navigation.navigate("Login")}/>*/}
+            <ProfitChart/>
             <Button title="Logout" onPress={() => signOutAsync()} />
         </View>
     );

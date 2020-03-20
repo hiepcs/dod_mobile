@@ -10,7 +10,7 @@ function* loginWorker(action) {
         const user = yield call(loginApi, action.payload);
         yield put(loginSuccess(user));
     } catch (e) {
-        console.log("Error: " + e);
+        alert("Error: " + e);
         yield put({type: LOGIN_FAILED, payload: e});
     }
 }

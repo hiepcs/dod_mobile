@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 
-export default class SettingsScreen extends React.Component {
+class SettingsScreen extends React.Component {
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -32,3 +32,5 @@ const styles = StyleSheet.create({
         marginTop: 16,
     },
 });
+
+export default SettingsScreen;
