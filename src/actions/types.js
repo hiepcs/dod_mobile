@@ -4,3 +4,6 @@ export const LOGIN_FAILED = 'loginFailed';
 export const LOGOUT_REQUESTED = 'logout';
 export const LOGOUT_SUCCESS = 'logoutSuccess';
 export const LOGOUT_FAILED = 'logoutFailed';
+export const GET_STAT_REQUESTED = 'getStatRequested';
+export const GET_STAT_SUCCESS = 'getStateSuccess';
+export const GET_STAT_FAILED = 'getStatFailed';

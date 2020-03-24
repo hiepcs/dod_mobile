@@ -1,9 +1,10 @@
 import React from 'react';
-import {createStackNavigator} from "@react-navigation/stack";
 import LoginScreen from "./LoginScreen";
 import HomeScreen from "./HomeScreen";
 import {NavigationContainer} from "@react-navigation/native";
+import {Ionicons, MaterialCommunityIcons} from '@expo/vector-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -14,7 +15,8 @@ import * as Constants from "expo-constants";
 import * as GoogleSignIn from "expo-google-sign-in";
 import {Platform, View} from "react-native";
 import {LOGIN_REQUESTED, LOGOUT_REQUESTED} from "../actions/types";
-import DetailsScreen from "./DetailsPage";
+import DetailsScreen from "./DetailsScreen";
+import EmptyScreen from "./EmptyScreen";
 
 const isInClient = Constants.default.appOwnership === 'expo';
 // const isInClient = false;
@@ -46,8 +48,43 @@ const clientId = isInClient
 function MainNavigation() {
     return (
         <Tab.Navigator>
-            <Tab.Screen name="Home" component={HomeScreen}/>
-            <Tab.Screen name="Settings" component={SettingsScreen}/>
+            <Tab.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                    tabBarLabel: 'Home',
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="home" color={color} size={size} />
+                    ),
+                }}
+            />
+            <Tab.Screen
+                name="Wallet"
+                component={EmptyScreen}
+                options={{
+                    tabBarLabel: 'Wallet',
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="wallet" color={color} size={size} />
+                    ),
+                }}/>
+            <Tab.Screen
+                name="Notifications"
+                component={EmptyScreen}
+                options={{
+                    tabBarLabel: 'Notification',
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="message" color={color} size={size} />
+                    ),
+                }}/>
+            <Tab.Screen
+                name="Settings"
+                component={SettingsScreen}
+                options={{
+                    tabBarLabel: 'Settings',
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="cogs" color={color} size={size} />
+                    ),
+                }}/>
         </Tab.Navigator>
     );
 }

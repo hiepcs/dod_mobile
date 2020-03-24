@@ -72,6 +72,7 @@ class LoginScreen extends React.Component {
                         {/*/>*/}
                         {this.props.loading ? Loader() : (
                                 <>
+                                    <Text>Dog of The Dow</Text>
                                     <GoogleSignInButton onPress={this.onPress}>
                                     {this.buttonTitle}
                                     </GoogleSignInButton>
