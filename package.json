@@ -17,7 +17,7 @@
     "expo-constants": "latest",
     "expo-google-sign-in": "^8.0.0",
     "expo-secure-store": "~8.0.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "minimist": "^1.2.5",
     "react": "~16.9.0",
     "react-content-loader": "^5.0.2",
